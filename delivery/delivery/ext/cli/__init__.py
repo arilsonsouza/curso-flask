@@ -1,7 +1,6 @@
 import click
 
-from delivery.ext.db import db
-from delivery.ext.site import models
+from delivery.ext.db import db, models
 
 # def add_user():
 	#"""Adiciona novo usuário"""
@@ -26,3 +25,9 @@ def init_app(app):
 		db.session.commit()
 
 		click.echo(f"Uusuário {email} criado com sucesso.")
+
+	@app.cli.command()
+	def list_users():
+		"""Lista todos os usuários"""
+		users = models.User.query.all()
+		click.echo(f"Users {users}")
